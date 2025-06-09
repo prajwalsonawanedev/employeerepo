@@ -1,18 +1,19 @@
 package com.example.EmployeeManagement.dto;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class DepartmentDto {
+public class DepartmentCategoryDto {
 
-    public Integer departmentId;
-    public String departmentName;
+    public Integer dCategoryId;
+    public String categoryName;
     public String description;
-    public String departmentHead;
+    public String manager;
     public String location;
     public Integer size;
 }

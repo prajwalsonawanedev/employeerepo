@@ -1,5 +1,12 @@
 package com.example.EmployeeManagement.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CandidateDto {
 
     public Integer id;
@@ -16,7 +23,5 @@ public class CandidateDto {
     public Integer noticePeriod;
     public Integer currentLocation;
     public String uploadCV;
-    public boolean isReadyToReallocatePune;
-
-
+    public boolean isReadyToReallocate;
 }
