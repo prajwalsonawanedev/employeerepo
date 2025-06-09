@@ -1,5 +1,12 @@
 package com.example.EmployeeManagement.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class EmployeeDto {
 
     public Integer employeeId;
@@ -32,5 +39,7 @@ public class EmployeeDto {
     public String terminatedDate;
     public String healthIssue;
     public String healthDescription;
+    public CompanyDto companyDto;
+    public DepartmentCategoryDto departmentCategoryDto;
 
 }

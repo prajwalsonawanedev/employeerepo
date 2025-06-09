@@ -2,6 +2,8 @@ package com.example.EmployeeManagement.dto;
 
 import lombok.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -20,4 +22,7 @@ public class PositionDto {
     public String benifites;
     public String noticePeriod;
     public boolean isImmediateJoiner;
+
+    public CriteriaDto criteriaDto;
+    public List<CandidateDto> candidateDtoList;
 }

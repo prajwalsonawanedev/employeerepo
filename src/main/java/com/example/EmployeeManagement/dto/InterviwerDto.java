@@ -11,5 +11,5 @@ public class InterviwerDto {
 
     public Integer interviwerId;
     public String interviwerDescription;
-    public Integer empId;
+    public EmployeeDto empId;
 }
