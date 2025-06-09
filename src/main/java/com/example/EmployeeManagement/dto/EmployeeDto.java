@@ -1,10 +1,5 @@
 package com.example.EmployeeManagement.dto;
 
-import lombok.*;
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class EmployeeDto {
 
     public Integer employeeId;
