@@ -16,7 +16,5 @@ public class CandidateDto {
     public Integer noticePeriod;
     public Integer currentLocation;
     public String uploadCV;
-    public boolean isReadyToReallocatePune;
-
-
+    public boolean isReadyToReallocate;
 }
