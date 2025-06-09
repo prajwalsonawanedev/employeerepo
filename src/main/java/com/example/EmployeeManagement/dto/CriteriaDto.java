@@ -22,4 +22,6 @@ public class CriteriaDto {
     public String preferredQualification;
     public boolean isShiftTimming;
     public String language;
+
+    public PositionDto positionDto;
 }
