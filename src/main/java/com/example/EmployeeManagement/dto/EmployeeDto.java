@@ -1,5 +1,7 @@
 package com.example.EmployeeManagement.dto;
 
+import com.example.EmployeeManagement.annotation.NullOrInRange;
+import com.example.EmployeeManagement.annotation.NullOrNotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,17 +12,25 @@ import lombok.NoArgsConstructor;
 public class EmployeeDto {
 
     public Integer employeeId;
+
+    @NullOrNotBlank(min = 5,max = 25,message = "Full Name is required and  must be between {min} and {max} characters",isMandatory = "yes")
     public String fullName;
+    @NullOrNotBlank(min = 1,max = 15,message = "Position Name is required and must be between {min} and {max} characters",isMandatory = "yes")
     public String position;
     public String dateOfJoining;
     public String adharCardNo;
     public String panCardNo;
     public String salary;
+    @NullOrNotBlank(min = 1,max = 10,message = "Gender required and must be between {min} and {max} characters",isMandatory = "yes")
     public String gender;
     public boolean maritalStatus;
+    @NullOrNotBlank(min = 3,max = 10,message = "SpouseName is required must be between {min} and {max} characters",isMandatory = "yes")
     public String spouseName;
+    @NullOrInRange(min = 10,max = 13,message = "Personal Mobile Number is required and  must be between {min} and {max} characters",isMandatory = "yes")
     public String personalMobileNumber;
-    public String personalWorkMobileNumber;
+    @NullOrNotBlank(min = 10,max = 13,message = "Working Mobile Number is required and  must be between {min} and {max} characters",isMandatory = "yes")
+    public String workMobileNumber;
+    @NullOrNotBlank(min = 5,max = 10,message = "Mobile Number is required and  must be between {min} and {max} characters",isMandatory = "yes")
     public String permanentAddress;
     public String addressStreet1;
     public String addressStreet2;
@@ -28,11 +38,16 @@ public class EmployeeDto {
     public String addressCity;
     public String addressState;
     public String addressCountry;
+    @NullOrInRange(min = 6,max = 6,message = "pincode is required and must be 6 digit",isMandatory = "yes")
     public String addressPincode;
     public String temporaryAddress;
+    @NullOrNotBlank(isEmail = "yes")
     public String personalEmailId;
+    @NullOrNotBlank(isEmail = "yes")
     public String companyEmailId;
+    @NullOrNotBlank(min = 1,max = 10,message = "Mother Name and must be between {min} and {max} characters",isMandatory = "yes")
     public String motherFullName;
+    @NullOrNotBlank(min = 1,max = 10,message = "Father Name is required and must be between {min} and {max} characters",isMandatory = "yes")
     public String fatherFullName;
     public String profileId;
     public String location;
