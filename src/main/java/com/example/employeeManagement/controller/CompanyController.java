@@ -6,6 +6,7 @@ import com.example.employeeManagement.service.CompanyService;
 import com.example.employeeManagement.util.EntityDtoConverter;
 import com.example.employeeManagement.util.ObjectConverter;
 import jakarta.validation.Valid;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +19,10 @@ public class CompanyController {
 
     private final CompanyService companyService;
 
-    private ObjectConverter objectConverter;
+    private final ObjectConverter objectConverter;
 
-    private EntityDtoConverter entityDtoConverter;
+    private final EntityDtoConverter entityDtoConverter;
 
-    @Autowired
     public CompanyController(CompanyService companyService, ObjectConverter objectConverter, EntityDtoConverter entityDtoConverter) {
         this.companyService = companyService;
         this.objectConverter = objectConverter;
@@ -31,19 +31,18 @@ public class CompanyController {
 
 
     @PostMapping("/addCompany")
-    public ResponseEntity<Company> addCompany(@RequestBody @Valid String payload) {
-        CompanyDto companyDto = objectConverter.convertToObject(payload, CompanyDto.class);
+    public ResponseEntity<CompanyDto> addCompany(@RequestBody @Valid CompanyDto companyDto) {
         Company company = entityDtoConverter.convert(companyDto, Company.class);
         return new ResponseEntity<>(companyService.saveCompany(company), HttpStatus.CREATED);
     }
 
-    @GetMapping("/getCompanyDetails/{id}")
-    public ResponseEntity<Company> getCompanyDetails(@PathVariable Integer id) {
+    @GetMapping("/getCompanyDetails")
+    public ResponseEntity<CompanyDto> getCompanyDetails(@RequestParam Integer id) {
         return new ResponseEntity<>(companyService.getCompanyDetails(id), HttpStatus.OK);
     }
 
     @GetMapping("/getAllCompanies")
-    public ResponseEntity<List<Company>> getAllCompanies() {
+    public ResponseEntity<List<CompanyDto>> getAllCompanies() {
         return new ResponseEntity<>(companyService.getAllCompanies(), HttpStatus.OK);
     }
 }

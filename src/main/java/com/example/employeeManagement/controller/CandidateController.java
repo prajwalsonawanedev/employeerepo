@@ -7,6 +7,7 @@ import com.example.employeeManagement.serviceImpl.CandidateServiceImpl;
 import com.example.employeeManagement.util.EntityDtoConverter;
 import com.example.employeeManagement.util.ObjectConverter;
 import jakarta.validation.Valid;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +18,12 @@ import java.util.List;
 @RestController
 public class CandidateController {
 
-    private CandidateService candidateService;
+    private final CandidateService candidateService;
 
-    private EntityDtoConverter entityDtoConverter;
+    private final EntityDtoConverter entityDtoConverter;
 
-    private ObjectConverter objectConverter;
+    private final ObjectConverter objectConverter;
 
-    @Autowired
     public CandidateController(CandidateService candidateService, EntityDtoConverter entityDtoConverter, ObjectConverter objectConverter) {
         this.candidateService = candidateService;
         this.entityDtoConverter = entityDtoConverter;
@@ -32,20 +32,17 @@ public class CandidateController {
 
 
     @PostMapping("/saveCandidate")
-    public ResponseEntity<Candidate> saveCandidate(@RequestBody @Valid String payload) {
-        CandidateDto candidateDto = objectConverter.convertToObject(payload, CandidateDto.class);
-        Candidate candidate = entityDtoConverter.convert(candidateDto, Candidate.class);
-        return new ResponseEntity<>(candidateService.saveCandidate(candidate), HttpStatus.CREATED);
+    public ResponseEntity<CandidateDto> saveCandidate(@RequestBody @Valid CandidateDto candidateDto, @RequestParam Integer positionId) {
+        return new ResponseEntity<>(candidateService.saveCandidate(candidateDto, positionId), HttpStatus.CREATED);
     }
 
     @GetMapping("/getAllCandidates")
-    public List<Candidate> getAllCandidates() {
-        List<Candidate> candidateList = candidateService.getAllCandidates();
-        return candidateList;
+    public List<CandidateDto> getAllCandidates() {
+        return candidateService.getAllCandidates();
     }
 
     @GetMapping("/getCandidateById")
-    public ResponseEntity<Candidate> getCandidateById(@RequestParam Long id) {
-        return new ResponseEntity<>(candidateService.getCandidateById(id), HttpStatus.OK);
+    public CandidateDto getCandidateById(@RequestParam Long id) {
+        return candidateService.getCandidateById(id);
     }
 }

@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface CompanyService {
 
-    Company saveCompany(Company company);
+    CompanyDto saveCompany(Company company);
 
     Company updateCompany(Company company);
 
-    Company getCompanyDetails(Integer id);
+    CompanyDto getCompanyDetails(Integer id);
 
-    List<Company> getAllCompanies();
+    List<CompanyDto> getAllCompanies();
 
 
 }
