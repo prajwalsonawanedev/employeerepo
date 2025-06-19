@@ -66,10 +66,8 @@ public class Position {
     private boolean isImmediateJoiner;
 
     @OneToOne(mappedBy = "position", cascade = CascadeType.ALL)
-    @JsonBackReference
     private Criteria criteria;
 
     @OneToMany(mappedBy = "position", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     private List<Candidate> candidateList = new ArrayList<>();
 }

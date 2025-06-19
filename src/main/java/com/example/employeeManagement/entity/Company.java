@@ -19,6 +19,14 @@ public class Company {
     @Column(name = "company_id")
     private Integer companyId;
 
+    public Integer getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
+    }
+
     @Column(name = "company_name", nullable = false)
     private String name;
 

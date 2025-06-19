@@ -55,8 +55,16 @@ public class Criteria {
     @Column(name = "language")
     private String language;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "position_id", nullable = false)
-    @JsonManagedReference
+    @OneToOne
+    @JoinColumn(name = "position_id"
+            , referencedColumnName = "position_id")
     private Position position;
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
 }

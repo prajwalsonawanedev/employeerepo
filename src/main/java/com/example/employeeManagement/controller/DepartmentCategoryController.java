@@ -1,12 +1,14 @@
 package com.example.employeeManagement.controller;
 
 import com.example.employeeManagement.dto.DepartmentCategoryDto;
+import com.example.employeeManagement.dto.DepartmentDto;
 import com.example.employeeManagement.entity.Department;
 import com.example.employeeManagement.entity.DepartmentCategory;
 import com.example.employeeManagement.service.DepartmentCategoryService;
 import com.example.employeeManagement.service.DepartmentService;
 import com.example.employeeManagement.util.EntityDtoConverter;
 import com.example.employeeManagement.util.ObjectConverter;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,15 +19,14 @@ import java.util.List;
 @RestController
 public class DepartmentCategoryController {
 
-    private DepartmentCategoryService departmentCategoryService;
+    private final DepartmentCategoryService departmentCategoryService;
 
-    private DepartmentService departmentService;
+    private final DepartmentService departmentService;
 
-    private EntityDtoConverter entityDtoConverter;
+    private final EntityDtoConverter entityDtoConverter;
 
-    private ObjectConverter objectConverter;
+    private final ObjectConverter objectConverter;
 
-    @Autowired
     public DepartmentCategoryController(DepartmentCategoryService departmentCategoryService, EntityDtoConverter entityDtoConverter, DepartmentService departmentService, ObjectConverter objectConverter) {
         this.departmentCategoryService = departmentCategoryService;
         this.entityDtoConverter = entityDtoConverter;
@@ -34,22 +35,19 @@ public class DepartmentCategoryController {
     }
 
     @PostMapping("/addDepartmentCategory")
-    public ResponseEntity<DepartmentCategory> addDepartmentCategoryController(@RequestBody String payload, @RequestParam Integer deptId) {
-        DepartmentCategoryDto departmentCategoryDto = objectConverter.convertToObject(payload, DepartmentCategoryDto.class);
+    public ResponseEntity<DepartmentCategoryDto> addDepartmentCategoryController(@RequestBody @Valid DepartmentCategoryDto departmentCategoryDto, @RequestParam Integer deptId) {
         DepartmentCategory departmentCategory = entityDtoConverter.convert(departmentCategoryDto, DepartmentCategory.class);
-        Department department = departmentService.getDepartmentById(deptId);
-        departmentCategory.setDepartment(department);
-//        departmentCategoryService.addDepartmentCategory(departmentCategory);
-        return new ResponseEntity<>(departmentCategoryService.addDepartmentCategory(departmentCategory), HttpStatus.CREATED);
+        return new ResponseEntity<>(departmentCategoryService.addDepartmentCategory(departmentCategory, deptId), HttpStatus.CREATED);
     }
 
-    @GetMapping("/getDepartmentCategoryById/{id}")
-    public ResponseEntity<DepartmentCategory> getDepartmentCategoryById(@PathVariable Integer id) {
-        DepartmentCategory departmentCategory = departmentCategoryService.getDepartmenCategoryById(id);
-        return new ResponseEntity<>(departmentCategory, HttpStatus.OK);
+    @GetMapping("/getDepartmentCategoryById")
+    public ResponseEntity<DepartmentCategoryDto> getDepartmentCategoryById(@RequestParam Integer id) {
+        DepartmentCategoryDto departmentCategoryDto = departmentCategoryService.getDepartmenCategoryById(id);
+        return new ResponseEntity<>(departmentCategoryDto, HttpStatus.OK);
     }
 
-    public ResponseEntity<List<DepartmentCategory>> getAllDepartmentCategory() {
+    @GetMapping("/getAllDepartmentCategory")
+    public ResponseEntity<List<DepartmentCategoryDto>> getAllDepartmentCategory() {
         return new ResponseEntity<>(departmentCategoryService.getAllDepartmentCategories(), HttpStatus.OK);
     }
 

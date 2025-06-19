@@ -17,13 +17,12 @@ import java.util.List;
 @RestController
 public class DepartmentController {
 
-    private DepartmentService departmentService;
+    private final DepartmentService departmentService;
 
-    private EntityDtoConverter entityDtoConverter;
+    private final EntityDtoConverter entityDtoConverter;
 
-    private ObjectConverter objectConverter;
+    private final ObjectConverter objectConverter;
 
-    @Autowired
     public DepartmentController(DepartmentService departmentService, EntityDtoConverter entityDtoConverter, ObjectConverter objectConverter) {
         this.departmentService = departmentService;
         this.entityDtoConverter = entityDtoConverter;
@@ -31,19 +30,18 @@ public class DepartmentController {
     }
 
     @PostMapping("/addDepartment")
-    public ResponseEntity<Department> saveDepartment(@RequestBody String payload) {
-        DepartmentDto departmentDto = objectConverter.convertToObject(payload, DepartmentDto.class);
+    public ResponseEntity<DepartmentDto> saveDepartment(@RequestBody DepartmentDto departmentDto) {
         Department department = entityDtoConverter.convert(departmentDto, Department.class);
         return ResponseEntity.status(HttpStatus.CREATED).body(departmentService.saveDepartment(department));
     }
 
-    @GetMapping("/getDepartmentDetails/{deptId}")
-    public ResponseEntity<Department> getDepartmentDetailsById(@PathVariable Integer deptId) {
+    @GetMapping("/getDepartmentDetails")
+    public ResponseEntity<DepartmentDto> getDepartmentDetailsById(@RequestParam Integer deptId) {
         return new ResponseEntity<>(departmentService.getDepartmentById(deptId), HttpStatus.OK);
     }
 
     @GetMapping("/getAllDepartment")
-    public ResponseEntity<List<Department>> getAllDepartment() {
+    public ResponseEntity<List<DepartmentDto>> getAllDepartment() {
         return new ResponseEntity<>(departmentService.getAllDepartment(), HttpStatus.OK);
     }
 }

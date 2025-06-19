@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class PositionController {
 
@@ -27,14 +29,17 @@ public class PositionController {
     }
 
     @PostMapping("/addPosition")
-    public ResponseEntity<Position> addPosition(@RequestBody String payload) {
-        PositionDto positionDto = objectConverter.convertToObject(payload, PositionDto.class);
-        Position position = entityDtoConverter.convert(positionDto, Position.class);
-        return new ResponseEntity<>(positionService.createPosition(position), HttpStatus.CREATED);
+    public ResponseEntity<PositionDto> addPosition(@RequestBody PositionDto positionDto) {
+        return new ResponseEntity<>(positionService.createPosition(positionDto), HttpStatus.CREATED);
     }
 
     @GetMapping("/getPositon")
-    public ResponseEntity<Position> getPosition(@RequestParam Integer pId) {
+    public ResponseEntity<PositionDto> getPosition(@RequestParam Integer pId) {
         return new ResponseEntity<>(positionService.getPosition(pId), HttpStatus.OK);
+    }
+
+    @GetMapping("/getAllPositions")
+    public ResponseEntity<List<PositionDto>> getAllPositions() {
+        return new ResponseEntity<>(positionService.getAllPositions(), HttpStatus.OK);
     }
 }

@@ -1,10 +1,15 @@
 package com.example.employeeManagement.service;
 
+import com.example.employeeManagement.dto.PositionDto;
 import com.example.employeeManagement.entity.Position;
+
+import java.util.List;
 
 public interface PositionService {
 
-    Position createPosition(Position position);
+    PositionDto createPosition(PositionDto positionDto);
 
-    Position getPosition(Integer id);
+    PositionDto getPosition(Integer id);
+
+    List<PositionDto> getAllPositions();
 }

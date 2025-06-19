@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface DepartmentService {
 
-    Department saveDepartment(Department department);
+    DepartmentDto saveDepartment(Department department);
 
-    Department getDepartmentById(Integer deptId);
+    DepartmentDto getDepartmentById(Integer deptId);
 
-    List<Department> getAllDepartment();
+    List<DepartmentDto> getAllDepartment();
 }
