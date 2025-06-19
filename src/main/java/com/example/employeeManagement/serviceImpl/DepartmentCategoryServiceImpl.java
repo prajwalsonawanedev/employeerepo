@@ -17,9 +17,9 @@ import java.util.Optional;
 @Service
 public class DepartmentCategoryServiceImpl implements DepartmentCategoryService {
 
-    private DepartmentCategoryRepository departmentCategoryRepository;
+    private final DepartmentCategoryRepository departmentCategoryRepository;
 
-    private DepartmentService departmentService;
+    private final DepartmentService departmentService;
 
     private final EntityDtoConverter entityDtoConverter;
 

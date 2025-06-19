@@ -66,8 +66,9 @@ public class Position {
     private boolean isImmediateJoiner;
 
     @OneToOne(mappedBy = "position", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Criteria criteria;
 
-    @OneToMany(mappedBy = "position", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "position", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Candidate> candidateList = new ArrayList<>();
 }

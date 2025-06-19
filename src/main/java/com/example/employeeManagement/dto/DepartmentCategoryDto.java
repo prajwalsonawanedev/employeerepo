@@ -21,6 +21,6 @@ public class DepartmentCategoryDto {
     private String manager;
     private String location;
     private Integer size;
-    private DepartmentDto departmentDto;
-    private List<EmployeeDto> employeeDtoList;
+    private DepartmentDto department;
+    private List<EmployeeDto> employeeList;
 }

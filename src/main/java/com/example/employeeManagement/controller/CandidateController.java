@@ -37,12 +37,12 @@ public class CandidateController {
     }
 
     @GetMapping("/getAllCandidates")
-    public List<CandidateDto> getAllCandidates() {
-        return candidateService.getAllCandidates();
+    public ResponseEntity<List<CandidateDto>> getAllCandidates() {
+        return new ResponseEntity<>(candidateService.getAllCandidates(), HttpStatus.OK);
     }
 
     @GetMapping("/getCandidateById")
-    public CandidateDto getCandidateById(@RequestParam Long id) {
-        return candidateService.getCandidateById(id);
+    public ResponseEntity<CandidateDto> getCandidateById(@RequestParam Long id) {
+        return new ResponseEntity<>(candidateService.getCandidateById(id), HttpStatus.OK);
     }
 }

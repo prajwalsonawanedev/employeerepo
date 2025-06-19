@@ -1,6 +1,7 @@
 package com.example.employeeManagement.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -65,6 +66,7 @@ public class Candidate {
 
     @ManyToOne
     @JoinColumn(name = "position_id")
+    @JsonIgnore
     private Position position;
 
     public Position getPosition() {

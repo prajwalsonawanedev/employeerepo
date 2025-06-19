@@ -28,22 +28,22 @@ public class PositionServiceImpl implements PositionService {
     @Override
     public PositionDto createPosition(PositionDto positionDto) {
         Position position = entityDtoConverter.convert(positionDto, Position.class);
-        Position result = positionRepository.save(position);
-        return entityDtoConverter.convert(result, PositionDto.class);
+        return entityDtoConverter.convert(positionRepository.save(position), PositionDto.class);
     }
 
     @Override
     public PositionDto getPosition(Integer id) {
-        Optional<Position> positionOptional = positionRepository.findById(id);
-
-        return positionOptional.map(position -> entityDtoConverter.convert(position, PositionDto.class)).orElseThrow(() -> new ResourceNotFoundException("Position Not Found position Id :" + id));
+        return positionRepository.findById(id)
+                .map(position -> entityDtoConverter.convert(position, PositionDto.class))
+                .orElseThrow(() -> new ResourceNotFoundException("Position Not Found position Id :" + id));
     }
 
     @Override
     public List<PositionDto> getAllPositions() {
         return positionRepository.findAll()
                 .stream()
-                .map(position -> entityDtoConverter.convert(position, PositionDto.class)).toList();
+                .map(position -> entityDtoConverter.convert(position, PositionDto.class))
+                .toList();
     }
 
 }

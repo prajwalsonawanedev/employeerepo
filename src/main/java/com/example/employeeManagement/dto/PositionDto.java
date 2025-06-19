@@ -27,6 +27,6 @@ public class PositionDto {
     public String noticePeriod;
     public boolean isImmediateJoiner;
 
-    public CriteriaDto criteriaDto;
+    public CriteriaDto criteria;
     public List<CandidateDto> candidateList;
 }

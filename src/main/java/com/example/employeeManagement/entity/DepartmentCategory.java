@@ -1,5 +1,8 @@
 package com.example.employeeManagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -39,6 +42,7 @@ public class DepartmentCategory {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id")
+    @JsonManagedReference
     private Department department;
 
     @OneToMany(mappedBy = "departmentCategory", cascade = CascadeType.ALL, orphanRemoval = true)

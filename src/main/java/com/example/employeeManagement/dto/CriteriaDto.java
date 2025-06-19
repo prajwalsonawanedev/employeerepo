@@ -54,5 +54,5 @@ public class CriteriaDto {
     private String language;
 
     @JsonProperty("positionDto")
-    private PositionDto positionDto;
+    private PositionDto position;
 }
